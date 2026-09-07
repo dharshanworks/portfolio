@@ -1,51 +1,71 @@
 import { Section } from './Section';
 import { experienceData } from '../data/portfolio';
-import { ExternalLink, Briefcase } from 'lucide-react';
+import { ExternalLink, Briefcase, Calendar, CheckCircle2 } from 'lucide-react';
 
 export function Experience() {
   return (
-    <Section id="experience" title="Experience" className="bg-slate-50/50 dark:bg-slate-900/20">
+    <Section id="experience" title="Work Experience" className="bg-slate-50/50 dark:bg-slate-900/20">
       <div className="max-w-4xl">
-        <div className="space-y-8">
+        <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg mb-10">
+          Professional experience applying frontend engineering and collaborative software development practices in real-world team environments.
+        </p>
+
+        <div className="space-y-8 relative pl-6 md:pl-10 border-l-2 border-slate-200 dark:border-slate-800">
           {experienceData.map((exp) => (
             <div 
               key={exp.id} 
-              className="relative pl-8 md:pl-0"
+              className="relative group"
             >
-              <div className="hidden md:block absolute left-[-29px] top-1 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-primary z-10 mt-1.5" />
-              <div className="hidden md:block absolute left-[-22px] top-6 bottom-[-32px] w-[2px] bg-slate-200 dark:bg-slate-800" />
+              {/* Timeline Marker */}
+              <div className="absolute -left-[31px] md:-left-[47px] top-6 w-5 h-5 rounded-full bg-white dark:bg-slate-950 border-4 border-primary shadow-sm shadow-primary/30 group-hover:scale-125 transition-transform" />
               
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-8 shadow-sm transition-all hover:shadow-md">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+              <div className="glass-card rounded-2xl p-6 md:p-8 border border-slate-200/80 dark:border-slate-800/80 group-hover:border-primary/40 transition-all duration-300">
+                
+                {/* Role Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                      <Briefcase size={20} className="text-primary md:hidden" />
+                    <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary mb-1">
+                      <Briefcase size={13} />
+                      Internship Experience
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
                       {exp.role}
                     </h3>
-                    <div className="text-lg font-medium text-slate-700 dark:text-slate-300 mt-1">
+                    <div className="text-base font-semibold text-slate-700 dark:text-slate-300 mt-0.5">
                       {exp.company}
                     </div>
                   </div>
-                  <div className="inline-flex items-center text-sm font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full whitespace-nowrap self-start">
-                    {exp.startDate} - {exp.endDate}
+
+                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-3 py-1.5 rounded-full self-start border border-slate-200/60 dark:border-slate-700/60">
+                    <Calendar size={13} />
+                    {exp.startDate} – {exp.endDate}
                   </div>
                 </div>
                 
-                <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400 mb-6 marker:text-slate-300 dark:marker:text-slate-600">
+                {/* Responsibilities list */}
+                <ul className="space-y-3 text-slate-600 dark:text-slate-300 text-sm md:text-base mb-6">
                   {exp.responsibilities.map((resp, index) => (
-                    <li key={index} className="leading-relaxed pl-2 -indent-5 ml-5">{resp}</li>
+                    <li key={index} className="flex items-start gap-2.5">
+                      <CheckCircle2 size={16} className="text-primary mt-1 shrink-0" />
+                      <span className="leading-relaxed">{resp}</span>
+                    </li>
                   ))}
                 </ul>
                 
+                {/* Footer link */}
                 {exp.companyUrl && (
-                  <a 
-                    href={exp.companyUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-dark transition-colors"
-                  >
-                    Company Website <ExternalLink size={14} />
-                  </a>
+                  <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                    <a 
+                      href={exp.companyUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary-dark transition-colors"
+                    >
+                      Visit {exp.company} Website <ExternalLink size={13} />
+                    </a>
+
+                    <span className="text-[11px] text-slate-400 font-mono">Verified Experience</span>
+                  </div>
                 )}
               </div>
             </div>
