@@ -8,4 +8,15 @@ export default defineConfig({
     tailwindcss(),
     react()
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('three')) {
+            return 'three';
+          }
+        },
+      },
+    },
+  },
 })
